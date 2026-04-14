@@ -154,20 +154,27 @@ public class Personagem {
 
    public String toString() {
       var sb = new StringBuilder();
-      sb.append("--> NOME: " + nome);
-      sb.append("\n");
-      sb.append("ENERGIA: " + energia);
-      sb.append("\n");
-      sb.append("FOME: " + fome);
-      sb.append("\n");
-      sb.append("SONO: " + sono);
-      sb.append("\n");
-      sb.append("MOCHILA: \n");
-      sb.append(exibirInventario());
-      sb.append("\n");
-      sb.append("REPERTORIO: \n");
-      sb.append(exibirRepertorio());
-
+      if(vivo) {
+         sb.append("--> NOME: " + nome);
+         sb.append("\n");
+         sb.append("ENERGIA: " + energia);
+         sb.append("\n");
+         sb.append("FOME: " + fome);
+         sb.append("\n");
+         sb.append("SONO: " + sono);
+         sb.append("\n");
+         sb.append("MOCHILA: \n");
+         sb.append(exibirInventario());
+         sb.append("\n");
+         sb.append("REPERTORIO: \n");
+         sb.append(exibirRepertorio());
+      }
+      else {
+         System.out.println("--> " + nome + " ESTA MORTO.");
+         System.out.println("\nInventario Final:\n" + exibirInventario());
+         System.out.println("Repertorio Final:\n" + exibirRepertorio());
+      }
+      
       return sb.toString();
    }
 }
