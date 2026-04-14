@@ -17,6 +17,14 @@ public class Personagem {
       this.sono = sono >= 0 && sono <= 10 ? sono : 0;
    }
 
+   Personagem(String nome, int energia, int fome, int sono) {
+      System.out.println("Construindo novo personagem");
+      this.nome = nome;
+      this.energia = energia < 0 || energia > 10 ? 10 : energia;
+      this.fome = fome >= 0 && fome <= 10 ? fome : 0;
+      this.sono = sono >= 0 && sono <= 10 ? sono : 0;
+   }
+
    void cacar(){
       if(energia >= 2) {
          System.out.printf("%s caçando\n", nome);
