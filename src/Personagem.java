@@ -59,9 +59,9 @@ public class Personagem {
    }
 
    public String toString() {
-      //nome: e:5, f:4, s:8
+      
       return String.format(
-      "%s: e:%d, f:%d, s:%d",
+      "NOME: %S\nENERGIA: %d\nFOME: %d\nSONO: %d\n",
       nome, energia, fome, sono
       );
    }
