@@ -95,10 +95,15 @@ public class Personagem {
    }
 
    public String toString() {
-      
-      return String.format(
-      "NOME: %S\nENERGIA: %d\nFOME: %d\nSONO: %d\n",
-      nome, energia, fome, sono
-      );
+      var sb = new StringBuilder();
+      sb.append("--> NOME: " + nome);
+      sb.append("\n");
+      sb.append("ENERGIA: " + energia);
+      sb.append("\n");
+      sb.append("FOME: " + fome);
+      sb.append("\n");
+      sb.append("SONO: " + sono);
+
+      return sb.toString();
    }
 }
