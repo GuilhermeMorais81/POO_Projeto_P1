@@ -103,6 +103,17 @@ public class Personagem {
       sb.append("FOME: " + fome);
       sb.append("\n");
       sb.append("SONO: " + sono);
+      sb.append("\n");
+
+      if(mochila.size() == 0) {
+         sb.append("A mochila esta vazia...");
+      }
+      else {
+         sb.append("MOCHILA: \n");
+         for(int i = 0; i < mochila.size(); i++) {
+            sb.append((i + 1)+ ". " + mochila.get(i) + "\n");
+         }
+      }
 
       return sb.toString();
    }
