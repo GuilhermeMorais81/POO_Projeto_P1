@@ -10,7 +10,7 @@ public class Musica {
     @Override
     public String toString() {
         var sb = new StringBuilder();
-        sb.append("TITULO DA MUSICA: " + titulo);
+        sb.append(titulo);
         return sb.toString();
     }
 }
