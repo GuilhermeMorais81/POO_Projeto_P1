@@ -11,6 +11,7 @@ public class Personagem {
    private int sono;
    private @Getter boolean vivo;
    private List<String> mochila = new ArrayList<>();
+   private List<Musica> repertorio = new ArrayList<>();
 
    Personagem() {
       System.out.println("Construindo novo personagem");
@@ -114,6 +115,33 @@ public class Personagem {
       return sb.toString();
    }
 
+   public void aprenderMusica(ArrayList<Musica> disponiveis) {
+      var gerador = new Random();
+      String nomeMusicaSorteada = disponiveis.get(gerador.nextInt(0, 10)).getTitulo();
+      for(int i = 0; i < repertorio.size(); i++) {
+         if(repertorio.get(i).getTitulo() == nomeMusicaSorteada) {
+            System.out.println(nome + " não conseguiu aprender uma musica");
+            return;
+         }
+      }
+      repertorio.add(new Musica(nomeMusicaSorteada));
+      System.out.println(nome + " aprendeu " + nomeMusicaSorteada + "!");
+   }
+
+   public String exibirRepertorio() {
+      var sb = new StringBuilder();
+      if(repertorio.size() == 0) {
+         sb.append("Repertorio vazio...");
+      }
+      else {
+         for(int i = 0; i < repertorio.size(); i++) {
+            sb.append((i + 1)+ ". " + repertorio.get(i) + "\n");
+         }
+      }
+
+      return sb.toString();
+   }
+
    public String toString() {
       var sb = new StringBuilder();
       sb.append("--> NOME: " + nome);
@@ -126,6 +154,9 @@ public class Personagem {
       sb.append("\n");
       sb.append("MOCHILA: \n");
       sb.append(exibirInventario());
+      sb.append("\n");
+      sb.append("REPERTORIO: \n");
+      sb.append(exibirRepertorio());
 
       return sb.toString();
    }
