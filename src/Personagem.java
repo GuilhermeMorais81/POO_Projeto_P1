@@ -1,8 +1,14 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class Personagem {
    String nome;
    private int energia;
    private int fome;
    private int sono;
+   private List<String> mochila = new ArrayList<>();
+
    Personagem() {
       System.out.println("Construindo novo personagem");
       energia = 10;
@@ -28,6 +34,7 @@ public class Personagem {
    void cacar(){
       if(energia >= 2) {
          System.out.printf("%s caçando\n", nome);
+         encontrarItem();
          energia -= 2; // energia = energia - 2
       } 
       else {
@@ -63,6 +70,27 @@ public class Personagem {
       }
       else {
          System.out.println(nome + " sem sono");
+      }
+   }
+
+   private void encontrarItem() {
+      var gerador = new Random();
+      switch (gerador.nextInt(1, 6)) {
+         case 1:
+            mochila.add("pena");
+            break;
+         case 2:
+            mochila.add("couro");
+            break;
+         case 3:
+            mochila.add("osso");
+            break;
+         case 4:
+            mochila.add("presa");
+            break;
+         case 5:
+            mochila.add("garra");
+            break;
       }
    }
 
