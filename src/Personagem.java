@@ -94,6 +94,20 @@ public class Personagem {
       }
    }
 
+   public String exibirInventario() {
+      var sb = new StringBuilder();
+      if(mochila.size() == 0) {
+         sb.append("A mochila esta vazia...");
+      }
+      else {
+         sb.append("MOCHILA: \n");
+         for(int i = 0; i < mochila.size(); i++) {
+            sb.append((i + 1)+ ". " + mochila.get(i) + "\n");
+         }
+      }
+      return sb.toString();
+   }
+
    public String toString() {
       var sb = new StringBuilder();
       sb.append("--> NOME: " + nome);
@@ -104,16 +118,7 @@ public class Personagem {
       sb.append("\n");
       sb.append("SONO: " + sono);
       sb.append("\n");
-
-      if(mochila.size() == 0) {
-         sb.append("A mochila esta vazia...");
-      }
-      else {
-         sb.append("MOCHILA: \n");
-         for(int i = 0; i < mochila.size(); i++) {
-            sb.append((i + 1)+ ". " + mochila.get(i) + "\n");
-         }
-      }
+      sb.append(exibirInventario());
 
       return sb.toString();
    }
