@@ -4,8 +4,9 @@ public class Jogo {
    public static final String SEPARADOR = "\n**********************";
    public static void main(String[] args) throws Exception {
       var gerador = new Random();
-      Personagem john = new Personagem("John", 10, 0, 0);
-      while(true) {
+      boolean continuar = true;
+      Personagem john = new Personagem("John", 3, 0, 0);
+      while(continuar) {
          switch (gerador.nextInt(1,4)) {
             case 1:
                john.cacar();
@@ -17,9 +18,17 @@ public class Jogo {
                john.dormir();
                break;
          }
-         System.out.println(john);
-         System.out.println(SEPARADOR);
-         Thread.sleep(5000);
+         if(john.isVivo()) {
+            System.out.println(john);
+            System.out.println(SEPARADOR);
+            Thread.sleep(5000);
+         }
+         else {
+            System.out.println("--> " + john.getNome() + " ESTA MORTO.\n\n Inventario final:");
+            System.out.println(john.exibirInventario());
+            continuar = false;
+         }
+         
       }
    }
 }

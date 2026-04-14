@@ -2,11 +2,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import lombok.Getter;
+
 public class Personagem {
-   String nome;
+   private @Getter String nome;
    private int energia;
    private int fome;
    private int sono;
+   private @Getter boolean vivo;
    private List<String> mochila = new ArrayList<>();
 
    Personagem() {
@@ -14,21 +17,24 @@ public class Personagem {
       energia = 10;
       fome = 0;
       sono = 0;
+      vivo = true;
    }
 
    Personagem(int energia, int fome, int sono) {
       System.out.println("Construindo novo personagem");
-      this.energia = energia < 0 || energia > 10 ? 10 : energia;
+      this.energia = energia <= 0 || energia > 10 ? 10 : energia;
       this.fome = fome >= 0 && fome <= 10 ? fome : 0;
       this.sono = sono >= 0 && sono <= 10 ? sono : 0;
+      vivo = true;
    }
 
    Personagem(String nome, int energia, int fome, int sono) {
       System.out.println("Construindo novo personagem");
       this.nome = nome;
-      this.energia = energia < 0 || energia > 10 ? 10 : energia;
+      this.energia = energia <= 0 || energia > 10 ? 10 : energia;
       this.fome = fome >= 0 && fome <= 10 ? fome : 0;
       this.sono = sono >= 0 && sono <= 10 ? sono : 0;
+      vivo = true;
    }
 
    void cacar(){
@@ -36,6 +42,7 @@ public class Personagem {
          System.out.printf("%s caçando\n", nome);
          encontrarItem();
          energia -= 2; // energia = energia - 2
+         if(energia <= 0) vivo = false;
       } 
       else {
          System.out.printf(
@@ -100,7 +107,6 @@ public class Personagem {
          sb.append("A mochila esta vazia...");
       }
       else {
-         sb.append("MOCHILA: \n");
          for(int i = 0; i < mochila.size(); i++) {
             sb.append((i + 1)+ ". " + mochila.get(i) + "\n");
          }
@@ -118,6 +124,7 @@ public class Personagem {
       sb.append("\n");
       sb.append("SONO: " + sono);
       sb.append("\n");
+      sb.append("MOCHILA: \n");
       sb.append(exibirInventario());
 
       return sb.toString();
