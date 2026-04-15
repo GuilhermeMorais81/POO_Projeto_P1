@@ -138,6 +138,29 @@ public class Personagem {
       System.out.println(nome + " aprendeu " + nomeMusicaSorteada + "!");
    }
 
+   public void duelar(Personagem oponente) {
+      if(!(repertorio.size() == 0)) {
+         System.out.println(nome + " iniciou duelo com " + oponente.nome);
+         var gerador = new Random();
+         Musica musicaAleatoria = repertorio.get(gerador.nextInt(0, repertorio.size()));
+         for(int i = 0; i < oponente.repertorio.size(); i++) {
+            if(musicaAleatoria.getTitulo() == oponente.repertorio.get(i).getTitulo()) {
+               energia--;
+               oponente.energia--;
+               if(energia <= 0) vivo = false;
+               if(oponente.energia <= 0) oponente.vivo = false;
+               System.out.println("O publico ficou enteado");
+               return;
+            }
+         }
+
+         oponente.energia--;
+         if(oponente.energia <= 0) oponente.vivo = false;
+         oponente.repertorio.add(musicaAleatoria);
+         System.out.println(nome + " Ganhou o duelo");
+      } 
+   }
+
    public String exibirRepertorio() {
       var sb = new StringBuilder();
       if(repertorio.size() == 0) {
