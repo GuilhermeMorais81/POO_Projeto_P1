@@ -175,6 +175,14 @@ public class Personagem {
       return sb.toString();
    }
 
+   public String exibirRelatorioFinal() {
+      var sb = new StringBuilder();
+      sb.append("\nInventario Final:\n" + exibirInventario());
+      sb.append("Repertorio Final:\n" + exibirRepertorio());
+
+      return sb.toString();
+   }
+
    public String toString() {
       var sb = new StringBuilder();
       sb.append("--> NOME: " + nome);
