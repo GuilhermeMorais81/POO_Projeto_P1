@@ -91,7 +91,7 @@ public class Personagem {
       }
    }
 
-   private void encontrarItem() {
+   public void encontrarItem() {
       var gerador = new Random();
       switch (gerador.nextInt(1, 6)) {
          case 1:
@@ -127,37 +127,43 @@ public class Personagem {
 
    public void aprenderMusica(ArrayList<Musica> disponiveis) {
       var gerador = new Random();
+      boolean sentinela = false;
       String nomeMusicaSorteada = disponiveis.get(gerador.nextInt(0, 10)).getTitulo();
-      for(int i = 0; i < repertorio.size(); i++) {
+      for(int i = 0; i < repertorio.size() && !sentinela; i++) {
          if(repertorio.get(i).getTitulo() == nomeMusicaSorteada) {
             System.out.println(nome + " não conseguiu aprender uma musica");
-            return;
+            sentinela = true;
          }
       }
-      repertorio.add(new Musica(nomeMusicaSorteada));
-      System.out.println(nome + " aprendeu " + nomeMusicaSorteada + "!");
+
+      if(!sentinela) {
+         repertorio.add(new Musica(nomeMusicaSorteada));
+         System.out.println(nome + " aprendeu " + nomeMusicaSorteada + "!");
+      }
    }
 
    public void duelar(Personagem oponente) {
       if(!(repertorio.size() == 0)) {
          System.out.println(nome + " iniciou duelo com " + oponente.nome);
          var gerador = new Random();
+         boolean sentinela = false;
          Musica musicaAleatoria = repertorio.get(gerador.nextInt(0, repertorio.size()));
-         for(int i = 0; i < oponente.repertorio.size(); i++) {
+         for(int i = 0; i < oponente.repertorio.size() && !sentinela; i++) {
             if(musicaAleatoria.getTitulo() == oponente.repertorio.get(i).getTitulo()) {
                energia--;
                oponente.energia--;
                if(energia <= 0) vivo = false;
                if(oponente.energia <= 0) oponente.vivo = false;
                System.out.println("O publico ficou enteado");
-               return;
+               sentinela = true;
             }
          }
-
-         oponente.energia--;
-         if(oponente.energia <= 0) oponente.vivo = false;
-         oponente.repertorio.add(musicaAleatoria);
-         System.out.println(nome + " Ganhou o duelo");
+         if(!sentinela) {
+            oponente.energia--;
+            if(oponente.energia <= 0) oponente.vivo = false;
+            oponente.repertorio.add(musicaAleatoria);
+            System.out.println(nome + " Ganhou o duelo");
+         }
       } 
    }
 

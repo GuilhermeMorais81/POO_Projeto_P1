@@ -22,6 +22,7 @@ public class Jogo {
       ArrayList<Musica> musicasTicoTrovador = new ArrayList<>();
       musicasTicoTrovador.add(new Musica("Vento do Norte"));
       Personagem ticoTrovador = new Personagem("Tico Trovador", 3, 8, 8, musicasTicoTrovador);
+      boolean vencedorDeclarado = false;
 
       while(john.isVivo() || ticoTrovador.isVivo()) {
          if(john.isVivo()) {
@@ -41,7 +42,14 @@ public class Jogo {
             System.out.println(john);
             System.out.println("\n");
          }
-         
+         else {
+            if(!vencedorDeclarado) {
+               System.out.println(john.getNome() + " ESTA MORTO");
+               System.out.println("==> " + ticoTrovador.getNome() + " VENCEU O JOGO!");
+               vencedorDeclarado = true;
+            }
+         }
+
          if(ticoTrovador.isVivo()) {
             ticoTrovador.aprenderMusica(musicas);
             switch (gerador.nextInt(1,11)) {
@@ -57,8 +65,31 @@ public class Jogo {
             }
             System.out.println(ticoTrovador);
          }
+         else {
+            if(!vencedorDeclarado) {
+               System.out.println(ticoTrovador.getNome() + " ESTA MORTO");
+               System.out.println("==> " + john.getNome() + " VENCEU O JOGO!");
+               vencedorDeclarado = true;
+            }
+         }
+
+         if(ticoTrovador.isVivo() && john.isVivo()) {
+            switch (gerador.nextInt(0,2)) {
+               case 0:
+                  ticoTrovador.duelar(john);
+                  break;
+               case 1:
+                  john.duelar(ticoTrovador);
+                  break;
+            }
+         }
+
          System.out.println(SEPARADOR);
          Thread.sleep(5000);
       }
+
+      System.out.println("AMBOS MORRERAM. FIM DE JOGO\n");
+      System.out.println("--> " + john.getNome() + ": " + john.exibirRelatorioFinal());
+      System.out.println("--> " + ticoTrovador.getNome() + ": " + ticoTrovador.exibirRelatorioFinal());
    }
 }
